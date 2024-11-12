@@ -1,6 +1,6 @@
-﻿namespace ConsoleApp1;
+﻿namespace FMBase;
 
-class Program
+class Hoomans
 {
     public class Hooman
     {
@@ -113,18 +113,18 @@ class Program
             }
 
             int x = 0;
-            for (int i = 0; i < this.formation[].Length; i++)
+            for (int i = 0; i < this.formation.Length; i++)
             {
                 x += this.formation[i];
             }
 
-            if (x!=10)
+            if (x != 10)
             {
                 Console.WriteLine("Zla formacja");
             }
         }
     }
-    
+
     public class Fan : Hooman
     {
         public bool isAngry;
@@ -150,10 +150,5 @@ class Program
                 this.flagsWon++;
             }
         }
-    }
-    
-    static void Main(string[] args)
-    {
-        Console.WriteLine("Nigger");
     }
 }
