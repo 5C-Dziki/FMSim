@@ -1,6 +1,6 @@
 namespace FMBase.Hoomans;
 
-public class Footballer(int age, string name, float height, float faithInClub, float motivation, int physical, int pace, int shooting, int defending, int passing, int dribbling, string pos) : Hooman(age, name, height, faithInClub, motivation)
+public class Player(int age, string name, float height, int physical, int pace, int shooting, int defending, int passing, int dribbling, string pos) : Hooman(age, name, height)
 {
     public int Physical = physical;
     public int Pace = pace;
@@ -48,7 +48,7 @@ public class Footballer(int age, string name, float height, float faithInClub, f
         }
         else
         {
-            Console.WriteLine("Goal!");
+            Console.WriteLine($"Goal! {this.Name} scores");
         }
     }
 

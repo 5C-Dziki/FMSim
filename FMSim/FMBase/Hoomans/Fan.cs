@@ -1,8 +1,6 @@
-using System.Xml.Linq;
+namespace FMBase.Hoomans;
 
-namespace FMBase;
-
-public class Fan(int age, string name, float height, float faithInClub, float motivation, bool isAngry, float frustration, bool isFlagHolder, int power) : Hooman(age, name, height, faithInClub, motivation)
+public class Fan(int age, string name, float height, bool isAngry, float frustration, bool isFlagHolder) : Hooman(age, name, height)
 {
     static readonly Random Xd = new Random();
     public bool IsAngry = isAngry;
@@ -16,7 +14,7 @@ public class Fan(int age, string name, float height, float faithInClub, float mo
 
     
     
-    public void Ustawka()
+    public void Fight()
     {
         Random random = new Random();
         if (this._power < random.Next(1, 100))

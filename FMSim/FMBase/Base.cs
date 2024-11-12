@@ -12,6 +12,8 @@ namespace FMBase
         static void Main(string[] args)
         {
             Console.WriteLine("WIP");
+            Player pululu = new Player(25, "Afimico Pululu", 175,  65, 88, 60, 26, 55, 70, "lm");
+            pululu.Shoot();
         }
     }
 }

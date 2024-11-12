@@ -1,6 +1,6 @@
 namespace FMBase.Hoomans;
 
-public class Trainer(int age, string name, float height, float faithInClub, float motivation, int experience) : Hooman(age, name, height, faithInClub, motivation)
+public class Trainer(int age, string name, float height, int experience) : Hooman(age, name, height)
 {
     public int Experience = experience;
     public string[] Achievements = new string[100];
@@ -11,25 +11,25 @@ public class Trainer(int age, string name, float height, float faithInClub, floa
     static Random _random = new Random();
     public int Charisma = _random.Next(1,99);
 
-    public void Reprimend()
+    public void Reprimand()
     {
         Random random = new Random();
         if (this.Charisma < random.Next(1, 100))
         {
-            Console.WriteLine("reprimend unsuccessful, morale went down!");
+            Console.WriteLine("Reprimand unsuccessful, morale went down!");
         }
         else
         {
-            Console.WriteLine("Reprimend successful, morale went up!");
+            Console.WriteLine("Reprimand successful, morale went up!");
         }
     }
 
     public void FormationChange()
     {
-        Console.WriteLine("podaj dlugosc formacji");
+        Console.WriteLine("Input formation length");
+        Console.WriteLine("Input formation width (start with defense, eg. 4-3-3)");
         for (int i = 0; i < Convert.ToInt32(Console.ReadLine()); i++)
         {
-            Console.WriteLine("podaj liczbe z formacji");
             this.Formation[i] = Convert.ToInt32(Console.ReadLine());
         }
 
@@ -41,7 +41,8 @@ public class Trainer(int age, string name, float height, float faithInClub, floa
 
         if (x != 10)
         {
-            Console.WriteLine("Zla formacja");
+            Console.WriteLine("Wrong formation, try again!");
+            FormationChange();
         }
     }
 }
