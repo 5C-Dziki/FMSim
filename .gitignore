@@ -28,6 +28,7 @@ bin/
 obj/
 TestResults/
 .vs/
+.idea/
 ###################
 # Web publish log #
 ###################
@@ -55,3 +56,7 @@ TestResults/
 ######################
 *.log
 *.sqlite
+###############
+# MacOS files #
+###############
+.DS_Store
