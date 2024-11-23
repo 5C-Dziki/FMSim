@@ -1,140 +1,136 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Linq;
-using System.Threading;
-using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FMInterface
 {
-    public class Interface 
+
+    public class Menu
     {
+        public List<string> MenuOptions { get; private set; }
 
-    }
-
-    public class Menu : Interface
-    {
- 
-
-        List<Option> MenuOptions = new List<Option>();
-        public Menu(string[] options, int len)
+        public Menu(string[] options)
         {
-           
-            for (int i = 0; i < len; i++)
-            {
-               
-                MenuOptions[i] = options[i]; 
-            }
+            MenuOptions = new List<string>(options);
         }
+
         public int DisplayMenu()
         {
-          
-            for (int i = 0; i < MenuOptions.Count; i++) 
+            Console.Clear();
+            Console.WriteLine("Please select an option:");
+
+            for (int i = 0; i < MenuOptions.Count; i++)
             {
-                Console.WriteLine(i + ". " + MenuOptions[i]);
+                Console.WriteLine($"{i}. {MenuOptions[i]}");
             }
+
             Console.WriteLine();
-            Console.WriteLine("Enter next action: ");
-            int UserInput;
-            bool Success = int.TryParse(Console.ReadLine(),out UserInput);
-            if (!Success) 
+            Console.Write("Enter your choice: ");
+
+            if (int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 0 && userInput < MenuOptions.Count)
             {
-                Console.WriteLine("Wrong input");
+                return userInput;
             }
-            return UserInput;
+
+            Console.WriteLine("Invalid input. Press any key to try again.");
+            Console.ReadKey();
+            return -1;
         }
 
         public void WelcomeMessage()
         {
-            Console.WriteLine("Welcome to FMSIM!");
-            Console.WriteLine("");
-        }
-
-        public void Clear()
-        {
             Console.Clear();
+            Console.WriteLine("Welcome to FMSIM!");
+            Console.WriteLine("=================\n");
         }
-
     }
+
     public class MenuSwitchHandler
     {
-        public int Input;
-        public int CurrentMenu;
-        public string[,] ListOfMenus;
-        public string[] CurrentMenuContent;
-      
-        public MenuSwitchHandler(int input, int currentMenu, string[] currentmenucontent, string[,] listOfMenus)
+        private readonly Dictionary<string, string[]> _menus;
+        private readonly Stack<string> _menuHistory;
+
+        public string CurrentMenu { get; private set; }
+
+        public MenuSwitchHandler(Dictionary<string, string[]> menus, string startMenu)
         {
-            this.CurrentMenu = currentMenu;
-            if (input < 0 || input >= CurrentMenuContent.Length)
+            _menus = menus;
+            _menuHistory = new Stack<string>();
+            CurrentMenu = startMenu;
+        }
+
+        public Menu GetCurrentMenu()
+        {
+            return new Menu(_menus[CurrentMenu]);
+        }
+
+        public void HandleMenuSelection(int input)
+        {
+            if (input == _menus[CurrentMenu].Length - 1) 
             {
-                throw new ArgumentOutOfRangeException("input out of range");
+                if (_menuHistory.Count > 0)
+                {
+                    CurrentMenu = _menuHistory.Pop(); 
+                }
+                else
+                {
+                    CurrentMenu = null; 
+                }
             }
             else
             {
-                this.Input = input;
+                string nextMenu = _menus[CurrentMenu][input];
+                if (_menus.ContainsKey(nextMenu))
+                {
+                    _menuHistory.Push(CurrentMenu);
+                    CurrentMenu = nextMenu;
+                }
+                else
+                {
+                    Console.WriteLine("No further menus. Press any key to return.");
+                    Console.ReadKey();
+                }
             }
-            this.ListOfMenus = listOfMenus;
-            this.CurrentMenuContent = currentmenucontent;
-            
-        }
-        public void SwitchToNewMenu()
-        {
-            string newMenu;
-            switch (this.Input)
-            {
-                case 0:
-                    newMenu = CurrentMenuContent[0];
-                    break;
-                case 1:
-                    newMenu = CurrentMenuContent[1];
-                    break;
-                case 2:
-                    newMenu = CurrentMenuContent[2];
-                    break;
-                case 3:
-                    newMenu = CurrentMenuContent[3];
-                    break;
-                case 4:
-                    newMenu = CurrentMenuContent[4];
-                    break;
-                default:
-                    newMenu = "No new menu";
-                    break;
-            }
-            Menu Menu = new Menu(ListOfMenus[CurrentMenu, newMenu], ListOfMenus[CurrentMenu, newMenu].Length);
-
-        }
-    
-    }
-    public class Option(string value)
-    {
-        string Value = value;
-
-        public static implicit operator Option(string v)
-        {
-            throw new NotImplementedException();
         }
     }
 
- 
     internal class Run
     {
-        
         static void Main(string[] args)
         {
-            string[] basicInterface = new string[4] { "New game", "Load game", "Settings", "Exit" };
-            string[] settingsInterface = new string[3] { "Diffuculty", "Color scheme", "Exit" };
-            //Menu i1 = new Menu(basicInterface, basicInterface.Length);
-            //i1.WelcomeMessage();
-            //i1.DisplayMenu();   
+            
+            var menus = new Dictionary<string, string[]>
+            {
+                { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Exit" } },
+                { "Settings", new[] { "Difficulty", "Color Scheme", "Advanced Settings", "Exit" } },
+                { "New Game", new[] { "Start Game", "Tutorial", "How to play?", "Exit"} },
+                { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?", "Exit"} },
+                { "Advanced Settings", new[] { "Key Binds", "Game Info", "Exit" } }
+            };
+
+            
+            var menuSwitchHandler = new MenuSwitchHandler(menus, "MainMenu");
+
+           
+            var welcomeMenu = menuSwitchHandler.GetCurrentMenu();
+            welcomeMenu.WelcomeMessage();
+
             bool isRunning = true;
             while (isRunning)
             {
+                var currentMenu = menuSwitchHandler.GetCurrentMenu();
+                int selection = currentMenu.DisplayMenu();
 
+                if (selection == -1) continue;
+
+                menuSwitchHandler.HandleMenuSelection(selection);
+
+                if (menuSwitchHandler.CurrentMenu == null)
+                {
+                    isRunning = false;
+                }
             }
 
+            Console.WriteLine("Thank you for using FMSIM! Goodbye.");
         }
     }
-
-    
 }
