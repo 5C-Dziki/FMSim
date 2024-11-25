@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMBase", "FMBase\FMBase.csproj", "{6F7F2CF0-1173-4EC4-B2E7-1600D93F0AC9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FMBase", "FMBase\FMBase.csproj", "{6F7F2CF0-1173-4EC4-B2E7-1600D93F0AC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FMInterface", "FMInterface\FMInterface.csproj", "{37F70A57-0636-444F-AC68-8930B96C5E69}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{6F7F2CF0-1173-4EC4-B2E7-1600D93F0AC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F7F2CF0-1173-4EC4-B2E7-1600D93F0AC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F7F2CF0-1173-4EC4-B2E7-1600D93F0AC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37F70A57-0636-444F-AC68-8930B96C5E69}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37F70A57-0636-444F-AC68-8930B96C5E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37F70A57-0636-444F-AC68-8930B96C5E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37F70A57-0636-444F-AC68-8930B96C5E69}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
