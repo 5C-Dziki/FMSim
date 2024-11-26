@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using FMBase.Clubs;
+using FMInterface.CreateClub;
 
 namespace FMInterface
 {
@@ -98,7 +100,6 @@ namespace FMInterface
     {
         static void Main(string[] args)
         {
-            
             var menus = new Dictionary<string, string[]>
             {
                 { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Exit" } },
