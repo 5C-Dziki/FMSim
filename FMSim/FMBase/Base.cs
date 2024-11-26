@@ -4,16 +4,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FMBase.Hoomans;
+using FMInterface;
+
+using System.Text.Json;
 
 namespace FMBase
 {
-    internal class Base
+    class Base
     {
-        static void Main(string[] args)
+        string userName;
+        string saveName;
+        DateTime createdAt;
+
+        async void jsonDump()
         {
-            Console.WriteLine("WIP");
-            Player pululu = new Player(25, "Afimico Pululu", 175,  65, 88, 60, 26, 55, 70, "lm");
-            pululu.Shoot();
+            await using FileStream createStream = File.Create(saveName + ".json");
+            await JsonSerializer.SerializeAsync(createStream, this);
+        }
+
+        public void Main(string[] args)
+        {
+            Base cos = new Base();
+            cos.userName = "mish";
+            cos.saveName = "test";
+            cos.createdAt = DateTime.Now;
+
+            cos.jsonDump();
         }
     }
 }
