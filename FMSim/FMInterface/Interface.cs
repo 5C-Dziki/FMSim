@@ -20,13 +20,13 @@ namespace FMInterface
 
             for (int i = 0; i < MenuOptions.Count; i++)
             {
-                Console.WriteLine($"{i}. {MenuOptions[i]}");
+                Console.WriteLine($"{i+1}. {MenuOptions[i]}");
             }
 
             Console.WriteLine();
             Console.Write("Enter your choice: ");
 
-            if (int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 0 && userInput < MenuOptions.Count)
+            if (int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 0 && (userInput -1) < MenuOptions.Count)
             {
                 return userInput;
             }
@@ -65,6 +65,7 @@ namespace FMInterface
 
         public void HandleMenuSelection(int input)
         {
+            input -= 1;
             if (input == _menus[CurrentMenu].Length - 1) 
             {
                 if (_menuHistory.Count > 0)
