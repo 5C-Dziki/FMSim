@@ -1,7 +1,10 @@
+using FMBase.Hoomans;
 namespace FMBase.Clubs;
 
-public class Fanclub(string name, string description, string colors, int[] members, string loadout, string balance) : Club(name, description, colors, members)
+
+
+public class Fanclub(string name, string description, string colors, Fan[] members, string loadout, string balance) : Club(name, description, colors)
 {
     public string Loadout = loadout;
-    public string Balance = balance;
+    public Fan[] Members = members;
 }
