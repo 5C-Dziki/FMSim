@@ -8,12 +8,12 @@ namespace FMInterface.Actions;
 
 public class FanFight
 {
-    public  void fan_fighting(Fanclub selfFanclub, Fanclub enemyFanclub)
+    public  void fan_fighting(FanClub selfFanClub, FanClub enemyFanClub)
     {
-        Console.WriteLine($"fight begins: {selfFanclub.Name} VS {enemyFanclub.Name}");
-        var membersLength = selfFanclub.Members.Length;
+        Console.WriteLine($"fight begins: {selfFanClub.Name} VS {enemyFanClub.Name}");
+        var membersLength = selfFanClub.Members.Length;
         Random randMember = new Random();
-        var fighter = selfFanclub.Members[randMember.Next(0, membersLength)];
+        var fighter = selfFanClub.Members[randMember.Next(0, membersLength)];
         fighter.Fight();
     }
 }
