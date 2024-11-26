@@ -1,10 +1,8 @@
-using FMBase.Clubs;
-
-namespace FMInterface.CreateClub
+namespace FMBase.Clubs
 {
-    public class UserClub : Club
+    public class UserFootballClub : Club
     {
-        public UserClub(string name, string description, string colors)
+        public UserFootballClub(string name, string description, string colors)
             : base(name, description, colors, new int[0])
         {
         }

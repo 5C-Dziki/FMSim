@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using FMBase.Clubs;
+using FMInterface.CreateClub;
 
 namespace FMInterface
 {
@@ -97,7 +99,18 @@ namespace FMInterface
     {
         static void Main(string[] args)
         {
-            
+            UserFootballClub club = ClubManager.CreateClub();
+            if (club != null)
+            {
+                Console.WriteLine("Club created successfully!");
+                club.DisplayClubInfo();
+                
+                club.AddMember(1);
+                club.AddMember(2);
+
+                Console.WriteLine("\nUpdated club details after adding members:");
+                club.DisplayClubInfo();
+            }
             var menus = new Dictionary<string, string[]>
             {
                 { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Exit" } },
