@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using FMBase.Clubs;
+using FMBase.Hoomans;
 
 namespace FMInterface.CreateClub
 {
@@ -23,7 +24,7 @@ namespace FMInterface.CreateClub
                 return null;
             }
 
-            return new UserFootballClub(name, description, colors);
+            return new UserFootballClub(name, description, colors, new Player[100]);
         }
 
         private static string GetValidatedColor()
