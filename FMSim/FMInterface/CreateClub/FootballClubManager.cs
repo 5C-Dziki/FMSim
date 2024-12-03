@@ -5,7 +5,7 @@ using FMBase.Hoomans;
 
 namespace FMInterface.CreateClub
 {
-    public static class ClubManager
+    public static class FootballClubManager
     {
         public static UserFootballClub CreateClub()
         {

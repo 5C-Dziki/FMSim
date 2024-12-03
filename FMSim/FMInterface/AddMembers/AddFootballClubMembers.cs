@@ -2,7 +2,7 @@ using FMBase.Hoomans;
 
 namespace FMInterface;
 
-public class AddMembersInterface
+public class AddFootballClubMembers
 {
     private string[] players;
     private string[] coaches;
