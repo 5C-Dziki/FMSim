@@ -84,7 +84,7 @@ namespace FMInterface
                 string nextMenu = _menus[CurrentMenu][input];
                 if (CurrentMenu == "Start Game" && nextMenu == "Fanclub")
                 {
-                    FanclubManager.FanClubManager.CreateClub();
+                    FanClubManager.CreateClub();
                 }
 
                 if (CurrentMenu == "Start Game" && nextMenu == "Football Club")

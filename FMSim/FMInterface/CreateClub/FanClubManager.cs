@@ -4,9 +4,6 @@ using FMBase.Hoomans;
 
 namespace FMInterface.CreateClub;
 
-public class FanclubManager
-
-{
     public static class FanClubManager
     {
         public static UserFanClub CreateClub()
@@ -51,4 +48,3 @@ public class FanclubManager
             }
         }
     }
-}
