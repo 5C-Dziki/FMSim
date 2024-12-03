@@ -79,11 +79,7 @@ namespace FMInterface
             else
             {
                 string nextMenu = _menus[CurrentMenu][input];
-                if (CurrentMenu == "MainMenu" && nextMenu == "New Game")
-                {
-                    AddMembersInterface teamManager = new AddMembersInterface();
-                    teamManager.Run();
-                }
+                
                 if (_menus.ContainsKey(nextMenu))
                 {
                     _menuHistory.Push(CurrentMenu);
