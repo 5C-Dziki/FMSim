@@ -83,6 +83,16 @@ namespace FMInterface
             else
             {
                 string nextMenu = _menus[CurrentMenu][input];
+                if (CurrentMenu == "Start Game" && nextMenu == "Fanclub")
+                {
+                    FanClubManager.CreateClub();
+                }
+
+                if (CurrentMenu == "Start Game" && nextMenu == "Football Club")
+                {
+                    ClubManager.CreateClub();
+                }
+                
                 if (CurrentMenu == "Settings" && nextMenu == "Color Scheme")
                 {
                     FMInterface.Settings.ColorSettings.ChangeColorScheme();
@@ -129,7 +139,8 @@ namespace FMInterface
                 { "Settings", new[] { "Difficulty", "Color Scheme", "Cursor Visibility", "Cursor Size", "Advanced Settings", "Exit" } },
                 { "New Game", new[] { "Start Game", "Tutorial", "How to play?", "Exit"} },
                 { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?", "Exit"} },
-                { "Advanced Settings", new[] { "Key Binds", "Game Info", "Exit" } }
+                { "Advanced Settings", new[] { "Key Binds", "Game Info", "Exit" } },
+                { "Start Game" ,new[] {"Football Club","Fanclub"}}
             };
 
             

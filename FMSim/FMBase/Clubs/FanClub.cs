@@ -3,8 +3,7 @@ namespace FMBase.Clubs;
 
 
 
-public class FanClub(string name, string description, string colors, Fan[] members, string loadout, string balance) : Club(name, description, colors)
+public class FanClub(string name, string description, string colors, Fan[] members) : Club(name, description, colors)
 {
-    public string Loadout = loadout;
     public Fan[] Members = members;
 }
