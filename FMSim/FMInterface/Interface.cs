@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using FMBase.Clubs;
+using FMInterface.CreateClub;
+using FMInterface.Settings;
 
 namespace FMInterface
 {
@@ -20,13 +23,13 @@ namespace FMInterface
 
             for (int i = 0; i < MenuOptions.Count; i++)
             {
-                Console.WriteLine($"{i}. {MenuOptions[i]}");
+                Console.WriteLine($"{i+1}. {MenuOptions[i]}");
             }
 
             Console.WriteLine();
             Console.Write("Enter your choice: ");
 
-            if (int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 0 && userInput < MenuOptions.Count)
+            if (int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 0 && (userInput -1) < MenuOptions.Count)
             {
                 return userInput;
             }
@@ -65,6 +68,7 @@ namespace FMInterface
 
         public void HandleMenuSelection(int input)
         {
+            input -= 1;
             if (input == _menus[CurrentMenu].Length - 1) 
             {
                 if (_menuHistory.Count > 0)
@@ -79,7 +83,38 @@ namespace FMInterface
             else
             {
                 string nextMenu = _menus[CurrentMenu][input];
+                if (CurrentMenu == "Start Game" && nextMenu == "Fanclub")
+                {
+                    FanClubManager.CreateClub();
+                }
+
+                if (CurrentMenu == "Start Game" && nextMenu == "Football Club")
+                {
+                    ClubManager.CreateClub();
+                }
                 
+                if (CurrentMenu == "Settings" && nextMenu == "Color Scheme")
+                {
+                    FMInterface.Settings.ColorSettings.ChangeColorScheme();
+                    return;
+                }
+                if (CurrentMenu == "Settings" && nextMenu == "Cursor Visibility")
+                {
+                    CursorSettings cursorSettings = new CursorSettings();
+                    cursorSettings.ToggleCursorVisibility();
+                    Console.WriteLine($"Cursor is now {(cursorSettings.IsCursorVisible ? "visible" : "hidden")}");
+                    Console.ReadKey();
+
+                }
+
+
+                if(CurrentMenu == "Settings" && nextMenu == "Cursor Size")
+                {
+                    FMInterface.Settings.CursorSizeSettings.ChangeCursorSize();
+                    return;
+                }
+
+
                 if (_menus.ContainsKey(nextMenu))
                 {
                     _menuHistory.Push(CurrentMenu);
@@ -101,10 +136,11 @@ namespace FMInterface
             var menus = new Dictionary<string, string[]>
             {
                 { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Exit" } },
-                { "Settings", new[] { "Difficulty", "Color Scheme", "Advanced Settings", "Exit" } },
+                { "Settings", new[] { "Difficulty", "Color Scheme", "Cursor Visibility", "Cursor Size", "Advanced Settings", "Exit" } },
                 { "New Game", new[] { "Start Game", "Tutorial", "How to play?", "Exit"} },
                 { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?", "Exit"} },
-                { "Advanced Settings", new[] { "Key Binds", "Game Info", "Exit" } }
+                { "Advanced Settings", new[] { "Key Binds", "Game Info", "Exit" } },
+                { "Start Game" ,new[] {"Football Club","Fanclub"}}
             };
 
             
