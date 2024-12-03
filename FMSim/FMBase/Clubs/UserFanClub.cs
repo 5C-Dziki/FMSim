@@ -6,7 +6,7 @@ namespace FMBase.Clubs;
 public class UserFanClub (string name, string description, string colors, Fan[] members) : FanClub (name, description, colors, members)
 {
 
-    public void JoinFans()
+    public void AddFan()
     {
         Console.WriteLine("Name: ");
         string? name = Console.ReadLine();
