@@ -1,9 +1,4 @@
-using System;
-using System.Reflection.Metadata;
-using System.Text;
 using FMBase.Clubs;
-using FMBase.Hoomans;
-using System.Collections.Generic;
 namespace FMInterface.Actions;
 
 public class FanFight
