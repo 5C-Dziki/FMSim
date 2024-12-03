@@ -82,6 +82,12 @@ namespace FMInterface
             else
             {
                 string nextMenu = _menus[CurrentMenu][input];
+                if (CurrentMenu == "Settings" && nextMenu == "Color Scheme")
+                {
+                    FMInterface.Settings.ColorSettings.ChangeColorScheme();
+                    return;
+                }
+
                 if (_menus.ContainsKey(nextMenu))
                 {
                     _menuHistory.Push(CurrentMenu);
