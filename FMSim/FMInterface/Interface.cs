@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FMBase.Clubs;
 using FMInterface.CreateClub;
 using FMInterface.Settings;
+using System.Threading;
 
 namespace FMInterface
 {
@@ -51,14 +52,16 @@ namespace FMInterface
     {
         private readonly Dictionary<string, string[]> _menus;
         private readonly Stack<string> _menuHistory;
+        public int Menu;
 
         public string CurrentMenu { get; private set; }
 
-        public MenuSwitchHandler(Dictionary<string, string[]> menus, string startMenu)
+        public MenuSwitchHandler(Dictionary<string, string[]> menus, string startMenu, int menu)
         {
             _menus = menus;
             _menuHistory = new Stack<string>();
             CurrentMenu = startMenu;
+            Menu = menu;
         }
 
         public Menu GetCurrentMenu()
@@ -83,14 +86,20 @@ namespace FMInterface
             else
             {
                 string nextMenu = _menus[CurrentMenu][input];
-                if (CurrentMenu == "Start Game" && nextMenu == "Fanclub")
+                if (CurrentMenu == "Start Game" && nextMenu == "Fan Club")
                 {
-                    FanClubManager.CreateClub();
+                    Console.Clear();
+                     UserFanClub mainClub = FanClubManager.CreateClub();
+                     Menu = 2;
+                    Thread.Sleep(3000);
                 }
 
                 if (CurrentMenu == "Start Game" && nextMenu == "Football Club")
                 {
-                    ClubManager.CreateClub();
+                    Console.Clear();
+                    Console.WriteLine("Feature not yet working");
+                    Thread.Sleep(3000);
+                    return;
                 }
                 
                 if (CurrentMenu == "Settings" && nextMenu == "Color Scheme")
@@ -133,40 +142,49 @@ namespace FMInterface
     {
         static void Main(string[] args)
         {
-            var menus = new Dictionary<string, string[]>
+            int MenuNum = 0;
+            if (MenuNum == 0)
+            {
+                var menus = new Dictionary<string, string[]>
             {
                 { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Exit" } },
                 { "Settings", new[] { "Difficulty", "Color Scheme", "Cursor Visibility", "Cursor Size", "Advanced Settings", "Exit" } },
                 { "New Game", new[] { "Start Game", "Tutorial", "How to play?", "Exit"} },
                 { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?", "Exit"} },
                 { "Advanced Settings", new[] { "Key Binds", "Game Info", "Exit" } },
-                { "Start Game" ,new[] {"Football Club","Fanclub"}}
+                { "Start Game" ,new[] {"Football Club", "Fan Club", "Exit"}}
             };
 
-            
-            var menuSwitchHandler = new MenuSwitchHandler(menus, "MainMenu");
 
-           
-            var welcomeMenu = menuSwitchHandler.GetCurrentMenu();
-            welcomeMenu.WelcomeMessage();
+                var menuSwitchHandler = new MenuSwitchHandler(menus, "MainMenu", MenuNum);
 
-            bool isRunning = true;
-            while (isRunning)
-            {
-                var currentMenu = menuSwitchHandler.GetCurrentMenu();
-                int selection = currentMenu.DisplayMenu();
 
-                if (selection == -1) continue;
+                var welcomeMenu = menuSwitchHandler.GetCurrentMenu();
+                welcomeMenu.WelcomeMessage();
 
-                menuSwitchHandler.HandleMenuSelection(selection);
-
-                if (menuSwitchHandler.CurrentMenu == null)
+                bool isRunning = true;
+                while (isRunning)
                 {
-                    isRunning = false;
-                }
-            }
+                    var currentMenu = menuSwitchHandler.GetCurrentMenu();
+                    int selection = currentMenu.DisplayMenu();
 
-            Console.WriteLine("Thank you for using FMSIM! Goodbye.");
+                    if (selection == -1) continue;
+
+                    menuSwitchHandler.HandleMenuSelection(selection);
+
+                    if (menuSwitchHandler.CurrentMenu == null)
+                    {
+                        isRunning = false;
+                    }
+
+                    if (menuSwitchHandler.Menu == 2)
+                    {
+                        isRunning = false;
+                    }
+                }
+
+                Console.WriteLine("Thank you for using FMSIM! Goodbye.");
+            }
         }
     }
 }
