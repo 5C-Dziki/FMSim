@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using FMBase.Hoomans;
 
 namespace FMInterface.Actions
 {
-    public class Program
+    public class MatchInterface
     {
-        public static void PlayMatch(string[] args)
+        public static void PlayMatch()
         {
             // Tworzenie drużyn
             var teamA = new List<Player>
@@ -115,33 +116,6 @@ namespace FMInterface.Actions
 
                 Console.WriteLine();
             }
-        }
-    }
-
-    public class Player
-    {
-        public string Name { get; private set; }
-
-        public int Run { get; private set; }
-        public int Passing { get; private set; }
-        public int Defending { get; private set; }
-        public int Shooting { get; private set; }
-        public int Dribbling { get; private set; }
-        public int Physical { get; private set; }
-        public float Height { get; private set; }
-        public string Position { get; private set; }
-
-        public Player(int age, string name, float height, int physical, int pace, int shooting, int defending, int passing, int dribbling, string position)
-        {
-            Name = name;
-            Run = pace;
-            Physical = physical;
-            Shooting = shooting;
-            Defending = defending;
-            Passing = passing;
-            Dribbling = dribbling;
-            Height = height;
-            Position = position;
         }
     }
 
