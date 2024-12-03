@@ -87,11 +87,6 @@ namespace FMInterface
                 {
                     FanClubManager.CreateClub();
                 }
-
-                if (CurrentMenu == "Start Game" && nextMenu == "Football Club")
-                {
-                    FootballClubManager.CreateClub();
-                }
                 
                 if (CurrentMenu == "Settings" && nextMenu == "Color Scheme")
                 {
