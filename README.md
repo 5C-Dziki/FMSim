@@ -11,3 +11,8 @@ Wyjątkową cechą **FMSim** jest urozmaicenie zwykłych rozgrywek piłkarskich 
 
 ### Trello
 [Link do tablicy](https://trello.com/b/HYPPgvi8/fmsim)
+
+### Technologie i oprogramowanie
+- .NET 8.0
+- kompilator C#
+- IDE: VS2022
