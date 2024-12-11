@@ -107,10 +107,13 @@ namespace FMInterface
                     FMInterface.Settings.ColorSettings.ChangeColorScheme();
                     return;
                 }
+
                 if (CurrentMenu == "Settings" && nextMenu == "Cursor Visibility")
                 {
                     CursorSettings cursorSettings = new CursorSettings();
                     cursorSettings.ToggleCursorVisibility();
+
+                    Console.Clear();
                     Console.WriteLine($"Cursor is now {(cursorSettings.IsCursorVisible ? "visible" : "hidden")}");
                     Console.ReadKey();
 
@@ -131,6 +134,7 @@ namespace FMInterface
                 }
                 else
                 {
+                    Console.Clear();
                     Console.WriteLine("No further menus. Press any key to return.");
                     Console.ReadKey();
                 }
