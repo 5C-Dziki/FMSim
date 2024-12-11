@@ -15,7 +15,8 @@ namespace FMInterface.CreateClub;
             string description = Console.ReadLine() ?? string.Empty;
 
             Console.WriteLine("Enter the basic colors of your club (in hexadecimal, e.g., #FF5733):");
-            string colors = GetValidatedColor();
+            string colors = Console.ReadLine() ?? string.Empty;
+            //string colors = GetValidatedColor(input); (WIP)
             
             Console.WriteLine("Enter the Number of Fans you want to join:");
             int fanCount = int.Parse(Console.ReadLine() ?? string.Empty);
@@ -29,7 +30,7 @@ namespace FMInterface.CreateClub;
             return new UserFanClub(name, description, colors, new Fan[fanCount]);
         }
 
-        private static string GetValidatedColor()
+        private static string GetValidatedColor(string color)
         {
             while (true)
             {
@@ -40,10 +41,13 @@ namespace FMInterface.CreateClub;
                 if (hexColorRegex.IsMatch(input))
                 {
                     string colorhex = input;
+                    return colorhex;
                 }
                 else
                 {
                     Console.WriteLine("Invalid color format. Please enter a valid hexadecimal color (e.g., #FF5733):");
+                    string fixedHex = Console.ReadLine();
+                    GetValidatedColor(fixedHex);
                 }
             }
         }
