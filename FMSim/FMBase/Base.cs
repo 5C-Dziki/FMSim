@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FMBase.Hoomans;
+﻿using System.Text.Json;
 
 namespace FMBase
 {
-    internal class Base
+    public class Base
     {
-        static void Main(string[] args)
+        async static public void JsonDump(Object obj, string name)
         {
-            Console.WriteLine("WIP");
-            Player pululu = new Player(25, "Afimico Pululu", 175,  65, 88, 60, 26, 55, 70, "lm");
-            pululu.Shoot();
+            await using FileStream createStream = File.Create(name + ".json");
+            await JsonSerializer.SerializeAsync(createStream, obj);
         }
     }
 }
