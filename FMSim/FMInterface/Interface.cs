@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FMBase.Clubs;
 using FMInterface.CreateClub;
 using FMInterface.Settings;
+using FMInterface.Actions;
 using System.Threading;
 
 namespace FMInterface
@@ -97,7 +98,7 @@ namespace FMInterface
                 if (CurrentMenu == "Start Game" && nextMenu == "Football Club")
                 {
                     Console.Clear();
-                    Console.WriteLine("Feature not yet working");
+                    MatchInterface.PlayMatch();
                     Thread.Sleep(3000);
                     return;
                 }
