@@ -53,15 +53,16 @@ namespace FMInterface.Actions
                     Console.WriteLine("S. Shoot");
                 }
 
-                Console.WriteLine("5. Show Match Log");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("L. Show Match Log");
+                Console.WriteLine("Q. Exit");
 
                 Console.Write("Your choice: ");
-                var choice = Console.ReadLine();
+                var choice = Char.ToLower(Console.ReadKey().KeyChar);
+                Console.Clear();
 
                 switch (choice)
                 {
-                    case "P":
+                    case 'p':
                         if (match.CurrentField != "C")
                         {
                             Console.WriteLine(match.Pass(teamA[0]));
@@ -71,7 +72,7 @@ namespace FMInterface.Actions
                             Console.WriteLine("Invalid action in this field.");
                         }
                         break;
-                    case "D":
+                    case 'd':
                         if (match.CurrentField != "C")
                         {
                             Console.WriteLine(match.Dribble(teamA[0], teamB[1]));
@@ -81,7 +82,7 @@ namespace FMInterface.Actions
                             Console.WriteLine("Invalid action in this field.");
                         }
                         break;
-                    case "R":
+                    case 'r':
                         if (match.CurrentField != "C" || match.CurrentField != "B")
                         {
                             Console.WriteLine(match.Run(teamA[0], teamB[1]));
@@ -91,7 +92,7 @@ namespace FMInterface.Actions
                             Console.WriteLine("Invalid action in this field.");
                         }
                         break;
-                    case "S":
+                    case 's':
                         if (match.CurrentField == "B" || match.CurrentField == "C")
                         {
                             Console.WriteLine(match.Shoot(teamA[0], teamB[1]));
@@ -101,11 +102,11 @@ namespace FMInterface.Actions
                             Console.WriteLine("Invalid action in this field.");
                         }
                         break;
-                    case "5":
+                    case 'l':
                         Console.WriteLine("\nMatch Log:");
                         Console.WriteLine(match.GetMatchLog());
                         break;
-                    case "6":
+                    case 'q':
                         gameRunning = false;
                         Console.WriteLine("Exiting the game. Thank you for playing!");
                         break;

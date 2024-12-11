@@ -25,17 +25,24 @@ namespace FMInterface
 
             for (int i = 0; i < MenuOptions.Count; i++)
             {
-                Console.WriteLine($"{i+1}. {MenuOptions[i]}");
+                Console.WriteLine($"{i + 1}. {MenuOptions[i]}");
             }
+            Console.WriteLine("Q. Exit");
 
             Console.WriteLine();
             Console.Write("Enter your choice: ");
+            var choice = Char.ToLower(Console.ReadKey().KeyChar);
+            Console.WriteLine();
 
-            if (int.TryParse(Console.ReadLine(), out int userInput) && userInput >= 0 && (userInput -1) < MenuOptions.Count)
+            if (Char.IsNumber(choice) && Char.GetNumericValue(choice) >= 0 && (Char.GetNumericValue(choice) - 1) < MenuOptions.Count)
             {
-                return userInput;
+                return (int)Char.GetNumericValue(choice);
             }
-
+            else if (choice == 'q')
+            {
+                return MenuOptions.Count + 1;
+            }
+            Console.WriteLine(choice);
             Console.WriteLine("Invalid input. Press any key to try again.");
             Console.ReadKey();
             return -1;
@@ -73,15 +80,15 @@ namespace FMInterface
         public void HandleMenuSelection(int input)
         {
             input -= 1;
-            if (input == _menus[CurrentMenu].Length - 1) 
+            if (input == _menus[CurrentMenu].Length)
             {
                 if (_menuHistory.Count > 0)
                 {
-                    CurrentMenu = _menuHistory.Pop(); 
+                    CurrentMenu = _menuHistory.Pop();
                 }
                 else
                 {
-                    CurrentMenu = null; 
+                    CurrentMenu = null;
                 }
             }
             else
@@ -90,9 +97,10 @@ namespace FMInterface
                 if (CurrentMenu == "Start Game" && nextMenu == "Fan Club")
                 {
                     Console.Clear();
-                     UserFanClub mainClub = FanClubManager.CreateClub();
-                     Menu = 2;
+                    UserFanClub mainClub = FanClubManager.CreateClub();
+                    Menu = 2;
                     Thread.Sleep(3000);
+                    return;
                 }
 
                 if (CurrentMenu == "Start Game" && nextMenu == "Football Club")
@@ -102,7 +110,7 @@ namespace FMInterface
                     Thread.Sleep(3000);
                     return;
                 }
-                
+
                 if (CurrentMenu == "Settings" && nextMenu == "Color Scheme")
                 {
                     FMInterface.Settings.ColorSettings.ChangeColorScheme();
@@ -120,13 +128,11 @@ namespace FMInterface
 
                 }
 
-
-                if(CurrentMenu == "Settings" && nextMenu == "Cursor Size")
+                if (CurrentMenu == "Settings" && nextMenu == "Cursor Size")
                 {
                     FMInterface.Settings.CursorSizeSettings.ChangeCursorSize();
                     return;
                 }
-
 
                 if (_menus.ContainsKey(nextMenu))
                 {
@@ -151,14 +157,14 @@ namespace FMInterface
             if (MenuNum == 0)
             {
                 var menus = new Dictionary<string, string[]>
-            {
-                { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Exit" } },
-                { "Settings", new[] { "Difficulty", "Color Scheme", "Cursor Visibility", "Cursor Size", "Advanced Settings", "Exit" } },
-                { "New Game", new[] { "Start Game", "Tutorial", "How to play?", "Exit"} },
-                { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?", "Exit"} },
-                { "Advanced Settings", new[] { "Key Binds", "Game Info", "Exit" } },
-                { "Start Game" ,new[] {"Football Club", "Fan Club", "Exit"}}
-            };
+                {
+                    { "MainMenu", new[] { "New Game", "Load Game", "Settings" } },
+                    { "Settings", new[] { "Difficulty", "Color Scheme", "Cursor Visibility", "Cursor Size", "Advanced Settings" } },
+                    { "New Game", new[] { "Start Game", "Tutorial", "How to play?" } },
+                    { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?" } },
+                    { "Advanced Settings", new[] { "Key Binds", "Game Info" } },
+                    { "Start Game" ,new[] { "Football Club", "Fan Club" }}
+                };
 
 
                 var menuSwitchHandler = new MenuSwitchHandler(menus, "MainMenu", MenuNum);
@@ -188,6 +194,7 @@ namespace FMInterface
                     }
                 }
 
+                Console.Clear();
                 Console.WriteLine("Thank you for using FMSIM! Goodbye.");
             }
         }
