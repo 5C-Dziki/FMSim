@@ -23,7 +23,7 @@
                     {
                         "In this tutorial, you will learn how to start a new game and modify settings.",
                         "1. Go to 'New Game' from the main menu.",
-                        "2. Choose 'Football Club' or 'User Club' to create your own team.",
+                        "2. Choose 'Football Club' or 'Fan Club' to create your own team.",
                         
                     }
                 ),
