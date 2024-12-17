@@ -54,15 +54,14 @@ namespace FMInterface.Settings
         private static void CustomCursorSize()
         {
             Console.Clear();
-            Console.WriteLine("Enter custom cursor size (1-100): ");
-
-            var input = Console.ReadKey().KeyChar.ToString();
-            Console.WriteLine(); 
-
-            if (!int.TryParse(input, out int choice) || choice < 1 || choice > 100)
+            Console.WriteLine("Enter custom cursor size: ");
+            if (!int.TryParse(Console.ReadLine(), out int choice))
             {
-                Console.WriteLine("Invalid input or out of range. Please try again.");
-                return;
+                Console.WriteLine("Invalid input. Please try again.");
+            }
+            if (choice < 1 && choice > 100)
+            {
+                Console.WriteLine("Invalid range of input. Please try again.");
             }
 
             SetCursorSize(choice);
