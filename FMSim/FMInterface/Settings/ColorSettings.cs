@@ -19,24 +19,32 @@ namespace FMInterface.Settings
             Console.WriteLine("5. Custom (You choose!)");
             Console.Write("\nEnter your choice: ");
 
-            var choice = Char.ToLower(Console.ReadKey().KeyChar);
+            var input = Console.ReadKey().KeyChar;
+            int choice;
+            if (Char.IsNumber(input))
+            {
+                choice = (int)Char.GetNumericValue(input);
+            }
+            else
+            {
+                choice = -1;
+            }
             Console.WriteLine();
-
             switch (choice)
             {
-                case '1':
+                case 1:
                     SetColorScheme(ConsoleColor.Gray, ConsoleColor.Black);
                     break;
-                case '2':
+                case 2:
                     SetColorScheme(ConsoleColor.White, ConsoleColor.Blue);
                     break;
-                case '3':
+                case 3:
                     SetColorScheme(ConsoleColor.Green, ConsoleColor.Black);
                     break;
-                case '4':
+                case 4:
                     SetColorScheme(ConsoleColor.Yellow, ConsoleColor.Black);
                     break;
-                case '5':
+                case 5:
                     CustomColorScheme();
                     break;
                 default:
