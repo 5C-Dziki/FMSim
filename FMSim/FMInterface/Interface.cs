@@ -5,6 +5,7 @@ using FMInterface.CreateClub;
 using FMInterface.Settings;
 using FMInterface.Actions;
 using System.Threading;
+using FMInterface.Info;
 
 namespace FMInterface
 {
@@ -134,6 +135,11 @@ namespace FMInterface
                     return;
                 }
 
+                if (CurrentMenu == "MainMenu" && nextMenu == "Game Info")
+                {
+                    GameInfo.DisplayGameInfo();
+                }
+
                 if (_menus.ContainsKey(nextMenu))
                 {
                     _menuHistory.Push(CurrentMenu);
@@ -158,11 +164,10 @@ namespace FMInterface
             {
                 var menus = new Dictionary<string, string[]>
                 {
-                    { "MainMenu", new[] { "New Game", "Load Game", "Settings" } },
+                    { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Game Info" } },
                     { "Settings", new[] { "Difficulty", "Color Scheme", "Cursor Visibility", "Cursor Size", "Advanced Settings" } },
                     { "New Game", new[] { "Start Game", "Tutorial", "How to play?" } },
                     { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?" } },
-                    { "Advanced Settings", new[] { "Key Binds", "Game Info" } },
                     { "Start Game" ,new[] { "Football Club", "Fan Club" }}
                 };
 
