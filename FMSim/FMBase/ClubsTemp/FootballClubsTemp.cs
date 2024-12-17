@@ -5,7 +5,7 @@ namespace FMBase.ClubsTemp;
 
 public class FootballClubsTemp
 {
-    public static FootballClub Generate(bool isPlayer)
+    public static FootballClub Generate(bool ownTeam)
     {
         FootballClub fc1 = new FootballClub("Club1", "Gud", "#331234", new Player[11], "#313141");
         fc1.Members[0] = new Player(20, "Afimico Pululu", 191, 68, 92, 68, 26, 57, 71, "Forward");
@@ -33,7 +33,7 @@ public class FootballClubsTemp
        fc2.Members[9] = new Player(34,"Kyle Walker",183,81,89,64,79,77,78, "Defender");
        fc2.Members[10] = new Player(46,"Gianluigi Buffon",192,89,51,86,94,78,93,"Goalkeeper");
 
-       if (isPlayer)
+       if (ownTeam)
        {
            return fc1;
        }

@@ -7,9 +7,9 @@ public class FootballClub(string name, string description, string colors, Player
     public string Jersey = jersey;
     public Player[] Members = members;
 
-    public FootballClub LoadClub(bool isPlayer)
+    public FootballClub LoadClub(bool OwnTeam)
     {
-        if (isPlayer)
+        if (OwnTeam)
         {
             return FootballClubsTemp.Generate(true);
         }
