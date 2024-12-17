@@ -19,33 +19,37 @@ namespace FMInterface.Settings
             Console.WriteLine("5. Custom (You choose!)");
             Console.Write("\nEnter your choice: ");
 
-            if (int.TryParse(Console.ReadLine(), out int choice))
+            var input = Console.ReadKey().KeyChar;
+            int choice;
+            if (Char.IsNumber(input))
             {
-                switch (choice)
-                {
-                    case 1:
-                        SetColorScheme(ConsoleColor.Gray, ConsoleColor.Black);
-                        break;
-                    case 2:
-                        SetColorScheme(ConsoleColor.White, ConsoleColor.Blue);
-                        break;
-                    case 3:
-                        SetColorScheme(ConsoleColor.Green, ConsoleColor.Black);
-                        break;
-                    case 4:
-                        SetColorScheme(ConsoleColor.Yellow, ConsoleColor.Black);
-                        break;
-                    case 5:
-                        CustomColorScheme();
-                        break;
-                    default:
-                        Console.WriteLine("Invalid choice. Keeping current settings.");
-                        break;
-                }
+                choice = (int)Char.GetNumericValue(input);
             }
             else
             {
-                Console.WriteLine("Invalid input. Please try again.");
+                choice = -1;
+            }
+            Console.WriteLine();
+            switch (choice)
+            {
+                case 1:
+                    SetColorScheme(ConsoleColor.Gray, ConsoleColor.Black);
+                    break;
+                case 2:
+                    SetColorScheme(ConsoleColor.White, ConsoleColor.Blue);
+                    break;
+                case 3:
+                    SetColorScheme(ConsoleColor.Green, ConsoleColor.Black);
+                    break;
+                case 4:
+                    SetColorScheme(ConsoleColor.Yellow, ConsoleColor.Black);
+                    break;
+                case 5:
+                    CustomColorScheme();
+                    break;
+                default:
+                    Console.WriteLine("Invalid choice. Keeping current settings.");
+                    break;
             }
 
             Console.WriteLine("\nPress any key to return to the previous menu.");
@@ -65,7 +69,12 @@ namespace FMInterface.Settings
             Console.Clear();
             Console.WriteLine("Enter the foreground color:");
             DisplayAvailableColors();
-            if (!Enum.TryParse(Console.ReadLine(), true, out ConsoleColor foreground))
+
+            Console.Write("Foreground: ");
+            var fgInput = Console.ReadKey().KeyChar.ToString();
+            Console.WriteLine();
+
+            if (!Enum.TryParse(fgInput, true, out ConsoleColor foreground))
             {
                 Console.WriteLine("Invalid color. Keeping current settings.");
                 return;
@@ -73,7 +82,12 @@ namespace FMInterface.Settings
 
             Console.WriteLine("Enter the background color:");
             DisplayAvailableColors();
-            if (!Enum.TryParse(Console.ReadLine(), true, out ConsoleColor background))
+
+            Console.Write("Background: ");
+            var bgInput = Console.ReadKey().KeyChar.ToString();
+            Console.WriteLine();
+
+            if (!Enum.TryParse(bgInput, true, out ConsoleColor background))
             {
                 Console.WriteLine("Invalid color. Keeping current settings.");
                 return;
