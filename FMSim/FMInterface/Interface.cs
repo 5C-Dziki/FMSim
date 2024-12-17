@@ -129,6 +129,13 @@ namespace FMInterface
 
                 }
 
+                if(CurrentMenu == "New Game" && nextMenu == "Tutorial")
+                {
+                    var tutorial = new FMInterface.Tutorial.Tutorial();
+                    tutorial.RunTutorial(); 
+                    return;
+                }
+
                 if (CurrentMenu == "Settings" && nextMenu == "Cursor Size")
                 {
                     FMInterface.Settings.CursorSizeSettings.ChangeCursorSize();
@@ -166,7 +173,7 @@ namespace FMInterface
                 {
                     { "MainMenu", new[] { "New Game", "Load Game", "Settings", "Game Info" } },
                     { "Settings", new[] { "Difficulty", "Color Scheme", "Cursor Visibility", "Cursor Size", "Advanced Settings" } },
-                    { "New Game", new[] { "Start Game", "Tutorial", "How to play?" } },
+                    { "New Game", new[] { "Start Game", "Tutorial" } },
                     { "Load Game", new[] { "Load Game from save", "Load game from file", "How to load a game?" } },
                     { "Start Game" ,new[] { "Football Club", "Fan Club" }}
                 };
