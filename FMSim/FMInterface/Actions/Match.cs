@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using FMBase.Clubs;
+using FMBase.ClubsTemp;
 using FMBase.Hoomans;
 
 namespace FMInterface.Actions
@@ -9,27 +11,22 @@ namespace FMInterface.Actions
         public static void PlayMatch()
         {
             // Tworzenie drużyn
-            var teamA = new List<Player>
-            {
-                new Player(25, "Lionel Messi", 1.70f, 80, 90, 95, 60, 85, 95, "Forward"),
-                new Player(28, "Sergio Ramos", 1.85f, 85, 70, 60, 90, 70, 60, "Defender")
-            };
-
-            var teamB = new List<Player>
-            {
-                new Player(30, "Cristiano Ronaldo", 1.87f, 90, 89, 93, 70, 78, 85, "Forward"),
-                new Player(27, "Manuel Neuer", 1.93f, 85, 50, 60, 90, 60, 70, "Goalkeeper")
-            };
-
+            var club1 = FootballClubsTemp.Generate(true);
+            var teamA = club1.Members;
+            var club2 = FootballClubsTemp.Generate(false);
+            var teamB = club2.Members;
             // Tworzenie meczu
             var match = new Match(teamA, teamB);
+            
 
             Console.WriteLine("Welcome to the Football Match Simulator!");
-            Console.WriteLine("Team A: Lionel Messi (Forward), Sergio Ramos (Defender)");
-            Console.WriteLine("Team B: Cristiano Ronaldo (Forward), Manuel Neuer (Goalkeeper)\n");
+            Console.WriteLine($"Team A: \"{club1.Name}\", Capitain is {teamA[10].Name}({teamA[10].Pos})");
+            Console.WriteLine($"Team B: \"{club2.Name}\", Capitain is {teamB[10].Name}({teamB[10].Pos})");
 
             bool gameRunning = true;
-
+            
+            Random random = new Random();
+            var Currentplayer = random.Next(teamA.Length);
             while (gameRunning)
             {
                 Console.WriteLine($"\nCurrent Field: {match.CurrentField}");
@@ -59,13 +56,20 @@ namespace FMInterface.Actions
                 Console.Write("Your choice: ");
                 var choice = Char.ToLower(Console.ReadKey().KeyChar);
                 Console.Clear();
-
+                
+                
                 switch (choice)
                 {
                     case 'p':
-                        if (match.CurrentField != "C")
+                        if (match.CurrentField == "A")
                         {
-                            Console.WriteLine(match.Pass(teamA[0]));
+                            Console.WriteLine(match.Pass(teamA[Currentplayer]));
+                            Currentplayer = random.Next(3,6);
+                        }
+                        else if (match.CurrentField == "B")
+                        {
+                            Console.WriteLine(match.Pass(teamB[Currentplayer]));
+                            Currentplayer = random.Next(0,3);
                         }
                         else
                         {
@@ -73,9 +77,13 @@ namespace FMInterface.Actions
                         }
                         break;
                     case 'd':
-                        if (match.CurrentField != "C")
+                        if (match.CurrentField == "A")
                         {
-                            Console.WriteLine(match.Dribble(teamA[0], teamB[1]));
+                            Console.WriteLine(match.Dribble(teamA[Currentplayer], teamB[random.Next(3,6)]));
+                        }
+                        else if (match.CurrentField == "B")
+                        {
+                            Console.WriteLine(match.Dribble(teamA[Currentplayer], teamB[random.Next(6,10)]));
                         }
                         else
                         {
@@ -85,7 +93,7 @@ namespace FMInterface.Actions
                     case 'r':
                         if (match.CurrentField != "C" || match.CurrentField != "B")
                         {
-                            Console.WriteLine(match.Run(teamA[0], teamB[1]));
+                            Console.WriteLine(match.Run(teamA[Currentplayer], teamB[random.Next(3,6)]));
                         }
                         else
                         {
@@ -95,7 +103,7 @@ namespace FMInterface.Actions
                     case 's':
                         if (match.CurrentField == "B" || match.CurrentField == "C")
                         {
-                            Console.WriteLine(match.Shoot(teamA[0], teamB[1]));
+                            Console.WriteLine(match.Shoot(teamA[Currentplayer], teamB[10]));
                         }
                         else
                         {
@@ -122,14 +130,14 @@ namespace FMInterface.Actions
 
     public class Match
     {
-        public List<Player> TeamA { get; private set; }
-        public List<Player> TeamB { get; private set; }
+        public Player[] TeamA { get; private set; }
+        public Player[] TeamB { get; private set; }
         public string CurrentField = "A"; // A: pole defensywne, B: środkowe, C: pole ofensywne
         public string MatchLog { get; private set; } = string.Empty;
 
-        private Random random = new Random();
+        private Random random1 = new Random();
 
-        public Match(List<Player> teamA, List<Player> teamB)
+        public Match(Player[] teamA, Player[] teamB)
         {
             TeamA = teamA;
             TeamB = teamB;
@@ -137,7 +145,7 @@ namespace FMInterface.Actions
 
         public string Pass(Player player)
         {
-            int passSkill = player.Passing + random.Next(-10, 10);
+            int passSkill = player.Passing + random1.Next(-10, 10);
             string result;
 
             if (passSkill >= 50)
@@ -157,8 +165,8 @@ namespace FMInterface.Actions
 
         public string Defend(Player defender, Player attacker)
         {
-            int defendSkill = defender.Defending + defender.Physical + random.Next(-10, 10);
-            int attackSkill = attacker.Dribbling + random.Next(-10, 10);
+            int defendSkill = defender.Defending + defender.Physical + random1.Next(-10, 10);
+            int attackSkill = attacker.Dribbling + random1.Next(-10, 10);
             string result;
 
             if (defendSkill >= attackSkill)
@@ -178,8 +186,8 @@ namespace FMInterface.Actions
 
         public string Shoot(Player player, Player goalkeeper)
         {
-            int shotSkill = player.Shooting + random.Next(-20, 20);
-            int goalkeepingSkill = goalkeeper.Defending + random.Next(-20, 20);
+            int shotSkill = player.Shooting + random1.Next(-20, 20);
+            int goalkeepingSkill = goalkeeper.Defending + random1.Next(-20, 20);
             string result;
 
             if (shotSkill > goalkeepingSkill)
@@ -198,8 +206,8 @@ namespace FMInterface.Actions
         }
         public string Run(Player player, Player defender)
         {
-            int paceSkill = player.Run + random.Next(-10, 10);
-            int physicalSkill = defender.Physical + random.Next(-10, 10);
+            int paceSkill = player.Run + random1.Next(-10, 10);
+            int physicalSkill = defender.Physical + random1.Next(-10, 10);
             string result;
 
             if (paceSkill > physicalSkill)
@@ -219,8 +227,8 @@ namespace FMInterface.Actions
 
         public string Dribble(Player player, Player defender)
         {
-            int dribbleSkill = player.Dribbling + random.Next(-10, 10);
-            int defendSkill = defender.Defending + defender.Physical + random.Next(-10, 10);
+            int dribbleSkill = player.Dribbling + random1.Next(-10, 10);
+            int defendSkill = defender.Defending + defender.Physical + random1.Next(-10, 10);
             string result;
 
             if (dribbleSkill > defendSkill)
