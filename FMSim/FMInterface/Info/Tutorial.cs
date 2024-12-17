@@ -45,7 +45,7 @@
                     new[]
                     {
                         "In the 'Start Game' tab, press 'New Game' to start a new game.",
-                        "You will have two options: Football Club and User Club.",
+                        "You will have two options: Football Club and Fan Club.",
                         "1. Choose your club type (Football Club or Fan Club).",
                         "2. Fill out the form to create YOUR OWN CLUB!",
                         "3. Play and enjoy the game!",
