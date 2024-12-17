@@ -130,7 +130,9 @@ namespace FMInterface
 
                 if(CurrentMenu == "New Game" && nextMenu == "Tutorial")
                 {
-
+                    var tutorial = new FMInterface.Tutorial.Tutorial();
+                    tutorial.RunTutorial(); 
+                    return;
                 }
 
                 if (CurrentMenu == "Settings" && nextMenu == "Cursor Size")
