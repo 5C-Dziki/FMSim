@@ -15,7 +15,7 @@ public class GameInfo
             "Head of Programmers Team: Maksymilian Fikus",
             "Programmer: Kamil Chęciński",
             "Programmer: Bartłomiej Łuć",
-            "Programmer Assistant: Jan Grześkowiak"
+            "Starszy klepacz kodu: Jan Grześkowiak"
         };
         
         foreach (var line in infoList)
