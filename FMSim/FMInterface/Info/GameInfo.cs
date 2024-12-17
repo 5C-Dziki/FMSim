@@ -11,11 +11,11 @@ public class GameInfo
             "FMSim",
             "Copyright © 2024",
             "Team:",
-            "Project Manager: Michal Krol",
+            "Project Manager: Michał Król",
             "Head of Programmers Team: Maksymilian Fikus",
-            "Programmer: Kamil Checinski",
-            "Programmer: Bartlomiej Luc",
-            "Programmer Assistant: Jan Grzeskowiak"
+            "Programmer: Kamil Chęciński",
+            "Programmer: Bartłomiej Łuć",
+            "Programmer Assistant: Jan Grześkowiak"
         };
         
         foreach (var line in infoList)
