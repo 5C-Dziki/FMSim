@@ -29,6 +29,7 @@ obj/
 TestResults/
 .vs/
 .idea/
+Saves/
 ###################
 # Web publish log #
 ###################
