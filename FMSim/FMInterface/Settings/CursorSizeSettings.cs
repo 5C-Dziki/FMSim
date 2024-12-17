@@ -25,23 +25,30 @@ namespace FMInterface.Settings
             }
             Console.WriteLine();
 
-            switch (choice)
+            try
             {
-                case 1:
-                    SetCursorSize(100);
-                    break;
-                case 2:
-                    SetCursorSize(50);
-                    break;
-                case 3:
-                    SetCursorSize(15);
-                    break;
-                case 4:
-                    CustomCursorSize();
-                    break;
-                default:
-                    Console.WriteLine("Invalid choice. Keeping current settings.");
-                    break;
+                switch (choice)
+                {
+                    case 1:
+                        SetCursorSize(100);
+                        break;
+                    case 2:
+                        SetCursorSize(50);
+                        break;
+                    case 3:
+                        SetCursorSize(15);
+                        break;
+                    case 4:
+                        CustomCursorSize();
+                        break;
+                    default:
+                        Console.WriteLine("Invalid choice. Keeping current settings.");
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
 
             Console.WriteLine("\nPress any key to return to the previous menu.");
